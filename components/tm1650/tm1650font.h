@@ -59,7 +59,7 @@ const uint8_t TM1650_ASCII_TO_RAW[] PROGMEM = {
     0b00110111,           // 'H', ord 0x48
     0b00110000,           // 'I', ord 0x49
     0b00111100,           // 'J', ord 0x4A
-    0b01110110,           // 'K', ord 0x4B (added)
+    0b00110111,           // 'K', ord 0x4B (added)
     0b00001110,           // 'L', ord 0x4C
     0b00010101,           // 'M', ord 0x4D (added)
     0b01110110,           // 'N', ord 0x4E (changed)
@@ -91,7 +91,7 @@ const uint8_t TM1650_ASCII_TO_RAW[] PROGMEM = {
     0b00010111,           // 'h', ord 0x68
     0b00010000,           // 'i', ord 0x69
     0b00111000,           // 'j', ord 0x6A (changed)
-    0b01110110,           // 'k', ord 0x6B (added)
+    0b00110111,           // 'k', ord 0x6B (added)
     0b00000110,           // 'l', ord 0x6C (changed)
     0b00010101,           // 'm', ord 0x6D (added)
     0b00010101,           // 'n', ord 0x6E
