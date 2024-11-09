@@ -25,6 +25,7 @@ display:
     # mode: 0
     # power: true
     # segment_map: PABCDEFG
+    # backward: True
     update_interval: 500ms
     lambda: |-
       static int dot = 0;

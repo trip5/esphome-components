@@ -12,6 +12,7 @@ TM1650Display = tm1650_ns.class_("TM1650Display", cg.PollingComponent, i2c.I2CDe
 TM1650DisplayRef = TM1650Display.operator("ref")
 
 CONF_SEGMENT_MAP = "segment_map"
+CONF_BACKWARD = "backward"
 
 CONFIG_SCHEMA = display.BASIC_DISPLAY_SCHEMA.extend({
     cv.GenerateID(): cv.declare_id(TM1650Display),
@@ -26,6 +27,7 @@ CONFIG_SCHEMA = display.BASIC_DISPLAY_SCHEMA.extend({
     ),
     cv.Optional(CONF_POWER, default=True): cv.boolean,
     cv.Optional(CONF_LENGTH, default=4): cv.All(cv.uint8_t, cv.Range(min=1, max=16)),
+    cv.Optional(CONF_BACKWARD, default=False): cv.boolean,
 }).extend(i2c.i2c_device_schema(0x24))
 
 if cv.Version.parse(ESPHOME_VERSION) < cv.Version.parse("2023.12.0"):
@@ -46,6 +48,7 @@ async def to_code(config):
     cg.add(var.set_segment_map(re.sub(r"[^A-G]", "H", config[CONF_SEGMENT_MAP].upper())))
     cg.add(var.set_power(config[CONF_POWER]))
     cg.add(var.set_length(config[CONF_LENGTH]))
+    cg.add(var.set_backward(config[CONF_BACKWARD]))
 
     if CONF_LAMBDA in config:
         cg.add(var.set_writer(await cg.process_lambda(

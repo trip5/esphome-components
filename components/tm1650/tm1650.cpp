@@ -14,6 +14,7 @@ void  TM1650Display::set_intensity(uint8_t intensity)     { this->intensity_ = i
 void  TM1650Display::set_mode(uint8_t mode)               { this->mode_ = mode; }
 void  TM1650Display::set_power(bool power)                { this->power_ = power; }
 void  TM1650Display::set_length(uint8_t length)           { this->length_ = length; }
+void  TM1650Display::set_backward(bool backward)          { this->backward_ = backward; }
 float TM1650Display::get_setup_priority() const           { return setup_priority::PROCESSOR; }
 
 void TM1650Display::set_segment_map(const char *segment_map) {
@@ -76,6 +77,7 @@ void TM1650Display::dump_config() {
   ESP_LOGCONFIG(TAG, "  Mode: %d", this->mode_);
   ESP_LOGCONFIG(TAG, "  Power: %d", this->power_);
   ESP_LOGCONFIG(TAG, "  Length: %d", this->length_);
+  ESP_LOGCONFIG(TAG, "  Backward: %d", this->backward_);
   LOG_UPDATE_INTERVAL(this);
 
   if (this->error_code_ == COMMUNICATION_FAILED) {
@@ -116,8 +118,11 @@ uint8_t TM1650Display::print(uint8_t start_pos, const char *str) {
       break;
     }
 
-    this->buffer_[pos] = data;
-
+    if (this->backward_) {
+      this->buffer_[(this->length_ - 1) - pos] = data;
+    } else {
+      this->buffer_[pos] = data;
+    }
     pos++;
   }
 

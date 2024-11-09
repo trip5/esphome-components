@@ -24,6 +24,7 @@ class TM1650Display : public PollingComponent, public i2c::I2CDevice {
   void set_segment_map(const char *segment_map);
   void set_power(bool power);
   void set_length(uint8_t length);
+  void set_backward(bool backward);
 
   float get_setup_priority() const override;
   void setup() override;
@@ -44,6 +45,7 @@ class TM1650Display : public PollingComponent, public i2c::I2CDevice {
   uint8_t mode_ = 0;
   bool power_ = 1;
   uint8_t length_;
+  bool backward_;
   optional<tm1650_writer_t> writer_{};
   uint8_t buffer_[TM1650_MAX_DIGITS] = {0};
   uint8_t segment_map_[TM1650_MAX_SEGMENTS] = {0};

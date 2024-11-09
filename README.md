@@ -1,6 +1,6 @@
-# ESPHome custom components
+# ESPHome TM1650 component
 
-This repository contains a collection of my custom components for [ESPHome](https://github.com/esphome/esphome).
+This repository contains a TM1650 Display custom components for [ESPHome](https://github.com/esphome/esphome).
 
 ## Usage
 
@@ -8,16 +8,21 @@ Add this to your `.yaml` file:
 
 ```yaml
 external_components:
-  - source: github://buzzer13/esphome-components@main
+  - source:
+      type: git
+      url: https://github.com/trip5/esphome-tm1650
+      ref: main
+    refresh: 60s
+    components: [ tm1650 ]
 ```
 
-## Components
+## About
 
-### `tm1650`
-
-7-segment LED display driver component.
+Forked from [buzzer13's custom components](https://github.com/buzzer13/esphome-components).
 
 Based on the [TM1637 ESPHome component](https://github.com/esphome/esphome/tree/dev/esphome/components/tm1637) and [analysis of 303WIFILC01 clock](https://github.com/maarten-pennings/303WIFILC01).
+
+Meant for use with the [EspHome-Led-Clock](https://github.com/trip5/EspHome-Led-Clock).
 
 #### Example
 
@@ -48,6 +53,7 @@ display:
     # mode: 0
     # power: true
     # segment_map: PABCDEFG
+    # backward: true
     update_interval: 500ms
     lambda: |-
       static int dot = 0;

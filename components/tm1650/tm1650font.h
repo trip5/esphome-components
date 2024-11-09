@@ -14,7 +14,17 @@ const uint8_t TM1650_DOT_SEGMENT  = 0b10000000;
 //  E |   | C
 //     ---
 //      D   P
-// PABCDEFG
+// Regular TM1650 is PABCDEFG
+
+// For others, you will need to remap as such: 0b12345678,
+//      2
+//     ---
+//  7 |   | 3
+//     -8-
+//  6 |   | 4
+//     ---
+//      5   1
+
 const uint8_t TM1650_ASCII_TO_RAW[] PROGMEM = {
     0b00000000,           // ' ', ord 0x20
     0b00000110,           // '!', ord 0x21 (changed)
